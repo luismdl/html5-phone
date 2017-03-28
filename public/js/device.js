@@ -20,6 +20,7 @@
     var orgId;
 	var clientId;
     var password;
+    var useSSL = true;
 
 	var topic = "iot-2/evt/sensorData/fmt/json";
     var isConnected = false;
@@ -129,7 +130,8 @@
 			onSuccess: onConnectSuccess,
 			onFailure: onConnectFailure,
 			userName: "use-token-auth",
-			password: password
+			password: password,
+			useSSL: useSSL
 		});
     }
 
