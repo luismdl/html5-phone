@@ -22,7 +22,7 @@
 	var clientId;
     var password;
     var useSSL = true;
-    var mqttPort 8883;
+    var mqttPort = 8883;
 
 	var topic = "iot-2/evt/sensorData/fmt/json";
     var isConnected = false;
