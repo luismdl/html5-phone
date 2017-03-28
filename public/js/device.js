@@ -21,6 +21,7 @@
 	var clientId;
     var password;
     var useSSL = true;
+    var mqttPort 8883;
 
 	var topic = "iot-2/evt/sensorData/fmt/json";
     var isConnected = false;
@@ -146,7 +147,7 @@
 				clientId = "d:"+orgId+":"+response.deviceType+":"+response.deviceId;
 				password = response.token;
 
-				client = new Paho.MQTT.Client(orgId+".messaging.internetofthings.ibmcloud.com", 1883, clientId);
+				client = new Paho.MQTT.Client(orgId+".messaging.internetofthings.ibmcloud.com", mqttPort, clientId);
 
 				console.log("Attempting connect");
 
