@@ -22,7 +22,9 @@
 	var clientId;
     var password;
     var useSSL = true;
-    var mqttPort = 8883;
+    var mqttPort = 1883;
+    var mqttPortSecure = 8883;
+    var deviceIdRegEx = /^([a-zA-Z0-9]){8,}$/;
 
 	var topic = "iot-2/evt/sensorData/fmt/json";
     var isConnected = false;
@@ -69,10 +71,17 @@
 	}
 
 	function getId() {
+
 		window.deviceId = prompt("Enter a unique ID of at least 8 characters containing only letters and numbers:");
-		if (window.deviceId) {
+		if (deviceIdRegEx.test(window.deviceId) === true) {
+			console.log("Connecting with device id: " + window.deviceId);
 			$("#deviceId").html(window.deviceId);
 			getDeviceCredentials();
+		}
+		else
+		{
+			window.alert("Device ID must be atleast 8 characters in length, and contain only letters and numbers.");
+			getId();
 		}
 	}
 
@@ -148,7 +157,7 @@
 				clientId = "d:"+orgId+":"+response.deviceType+":"+response.deviceId;
 				password = response.token;
 
-				client = new Paho.MQTT.Client(orgId+".messaging.internetofthings.ibmcloud.com", mqttPort, clientId);
+				client = new Paho.MQTT.Client(orgId+".messaging.internetofthings.ibmcloud.com", useSSL ? mqttPortSecure : mqttPort, clientId);
 
 				console.log("Attempting connect");
 
