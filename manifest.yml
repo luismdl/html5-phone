@@ -10,8 +10,8 @@ applications:
 - services:
   - iot-phone-cloudant-cloudantNoSQLDB
   - iot-phone-iotf-service
-  host: iot-phone
   name: iot-phone
+  random-route: true
   disk: 128M
   command: node app.js
   path: .
